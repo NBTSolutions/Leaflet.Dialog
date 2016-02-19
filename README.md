@@ -50,10 +50,10 @@ dialog.setContent("<p>Here's some new content!</p>");
 
 | Property | Type | Default | Description
 | --- | --- | --- | ---
-| size | [Array] | [ 300, 300 ] | An array of the starting width and height values (in pixels).
-| minSize | [Array] | [ 100, 100 ] | An array with the minimum resize width and height (in pixels).
-| maxSize | [Array] | [ 350, 350 ] | An array with the maximum resize width and height (in pixels).
-| anchor | [Array] | [ 250, 250 ] | The starting point anchor location (from the upper left) in pixels.
+| size | [Array][width, height] | [ 300, 300 ] | An array of the starting width and height values (in pixels).
+| minSize | [Array][width, height] | [ 100, 100 ] | An array with the minimum resize width and height (in pixels).
+| maxSize | [Array][width, height] | [ 350, 350 ] | An array with the maximum resize width and height (in pixels).
+| anchor | [Array][top, left] | [ 250, 250 ] | The starting point anchor location (from the upper left) in pixels.
 | position | [String] | 'topleft' | The leaflet control div to place the modal inside, as a starting reference point.
 | initOpen | [Boolean] | true | Whether or not to initialize in an open state.
 
@@ -64,8 +64,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | open() | this | dialog.open(); | Opens the dialog window.
 | close() | this | dialog.close(); | Closes the dialog window.
 | destroy() | this | dialog.destroy(); | Removes the dialog box from the window.
-| setLocation( [Array] anchor location ) | this | dialog.setLocation( [ 15, 15 ] ); | Move the dialog box to the specified pixel location ( Relative to the 'position' option )
-| setSize( [Array] size ) | this | dialog.setSize( [ 150, 150 ] ); | Resize the dialog window to the specified width and height.
+| setLocation( [Array][top, left] anchor location ) | this | dialog.setLocation( [ 15, 15 ] ); | Move the dialog box to the specified pixel location ( Relative to the 'position' option )
+| setSize( [Array][width, height] size ) | this | dialog.setSize( [ 150, 150 ] ); | Resize the dialog window to the specified width and height.
 | lock() | this | dialog.lock(); | Hides all visible dialog window controls.
 | unlock() | this | dialog.unlock(); | Re-instates all dialog window controls.
 | freeze() | this | dialog.freeze(); | Hides all visible dialog window movement/sizing controls.

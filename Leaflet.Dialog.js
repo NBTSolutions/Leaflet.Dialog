@@ -67,7 +67,7 @@ L.Control.Dialog = L.Control.extend({
     this._oldMousePos.x = 0;
     this._oldMousePos.y = 0;
 
-    this._move(location[0], location[1]);
+    this._move(location[1], location[0]);
 
     return this;
   },
@@ -153,8 +153,8 @@ L.Control.Dialog = L.Control.extend({
     container.style.width = this.options.size[0] + 'px';
     container.style.height = this.options.size[1] + 'px';
 
-    container.style.left = this.options.anchor[0] + 'px';
-    container.style.top = this.options.anchor[1] + 'px';
+    container.style.top = this.options.anchor[0] + 'px';
+    container.style.left = this.options.anchor[1] + 'px';
 
     var stop = L.DomEvent.stopPropagation;
     L.DomEvent
@@ -257,24 +257,19 @@ L.Control.Dialog = L.Control.extend({
   },
 
   _move: function(diffX, diffY){
-    var newX = this.options.anchor[0] + diffX;
-    var newY = this.options.anchor[1] + diffY;
+    var newY = this.options.anchor[0] + diffY;
+    var newX = this.options.anchor[1] + diffX;
 
-    if( newX > window.clientWidth ||
-      newX < 0 ||
-      newY > window.clientHeight ||
-      newY < 0 ){ return; }
+    this.options.anchor[0] = newY;
+    this.options.anchor[1] = newX;
 
-    this.options.anchor[0] = newX;
-    this.options.anchor[1] = newY;
-
-    this._container.style.left = this.options.anchor[0] + 'px';
-    this._container.style.top = this.options.anchor[1] + 'px';
+    this._container.style.top = this.options.anchor[0] + 'px';
+    this._container.style.left = this.options.anchor[1] + 'px';
 
     this._map.fire('dialog:moving', this);
 
-    this._oldMousePos.x += diffX;
     this._oldMousePos.y += diffY;
+    this._oldMousePos.x += diffX;
   },
 
   _resize: function(diffX, diffY){
@@ -320,8 +315,8 @@ L.Control.Dialog = L.Control.extend({
     this._container.style.width = this.options.size[0] + 'px';
     this._container.style.height = this.options.size[1] + 'px';
 
-    this._container.style.left = this.options.anchor[0] + 'px';
-    this._container.style.top = this.options.anchor[1] + 'px';
+    this._container.style.top = this.options.anchor[0] + 'px';
+    this._container.style.left = this.options.anchor[1] + 'px';
 
   }
 
