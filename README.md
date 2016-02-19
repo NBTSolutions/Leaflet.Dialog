@@ -55,6 +55,7 @@ dialog.setContent("<p>Here's some new content!</p>");
 | maxSize | [Array] | [ 350, 350 ] | An array with the maximum resize width and height (in pixels).
 | anchor | [Array] | [ 250, 250 ] | The starting point anchor location (from the upper left) in pixels.
 | position | [String] | 'topleft' | The leaflet control div to place the modal inside, as a starting reference point.
+| initOpen | [Boolean] | true | Whether or not to initialize in an open state.
 
 ## Methods:
 
@@ -63,7 +64,7 @@ dialog.setContent("<p>Here's some new content!</p>");
 | open() | this | dialog.open(); | Opens the dialog window.
 | close() | this | dialog.close(); | Closes the dialog window.
 | destroy() | this | dialog.destroy(); | Removes the dialog box from the window.
-| setLocation( [Array] anchor location ) | this | dialog.moveTo( [ 15, 15 ] ); | Move the dialog box to the specified pixel location ( Relative to the 'position' option )
+| setLocation( [Array] anchor location ) | this | dialog.setLocation( [ 15, 15 ] ); | Move the dialog box to the specified pixel location ( Relative to the 'position' option )
 | setSize( [Array] size ) | this | dialog.setSize( [ 150, 150 ] ); | Resize the dialog window to the specified width and height.
 | lock() | this | dialog.lock(); | Hides all visible dialog window controls.
 | unlock() | this | dialog.unlock(); | Re-instates all dialog window controls.
