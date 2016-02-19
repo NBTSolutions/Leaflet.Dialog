@@ -1,7 +1,7 @@
 {
   "name": "leaflet-dialog",
   "description": "Resizable, movable dialog window for Leaflet",
-  "version": "0.0.1",
+  "version": "1.0.0",
   "main": [
     "Leaflet.Dialog.js",
     "Leaflet.Dialog.css"
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "leaflet-dist": "0.7.x",
-    "fontawesome": "~4.4.0"
+    "fontawesome": "~4.5.0"
   },
   "devDependencies": {
     "leaflet": "~0.7.0",
