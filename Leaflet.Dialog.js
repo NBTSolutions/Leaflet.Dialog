@@ -1,10 +1,11 @@
 L.Control.Dialog = L.Control.extend({
   options: {
-    size: [ 200, 300 ],
+    size: [ 300, 300 ],
     minSize: [ 100, 100 ],
     maxSize: [ 350, 350 ],
     anchor: [ 250, 250 ],
-    position: 'topleft'
+    position: 'topleft',
+    initOpen: true
   },
 
   initialize: function (options){
@@ -20,6 +21,10 @@ L.Control.Dialog = L.Control.extend({
 
     this.update();
 
+    if(!this.options.initOpen){
+      this.close();
+    }
+
     return this._container;
   },
 
@@ -28,10 +33,17 @@ L.Control.Dialog = L.Control.extend({
       return;
     }
     this._container.style.visibility = '';
+
+    this._map.fire('dialog:opened', this);
+
+    return this;
   },
 
   close: function(){
     this._container.style.visibility = 'hidden';
+
+    this._map.fire('dialog:closed', this);
+    return this;
   },
 
   destroy: function(){
@@ -43,6 +55,67 @@ L.Control.Dialog = L.Control.extend({
 			this.onRemove(this._map);
 		}
 
+    this._map.fire('dialog:destroyed', this);
+    return this;
+  },
+
+  setLocation: function(location){
+    location = location || [ 250, 250 ];
+
+    this.options.anchor[0] = 0;
+    this.options.anchor[1] = 0;
+    this._oldMousePos.x = 0;
+    this._oldMousePos.y = 0;
+
+    this._move(location[0], location[1]);
+
+    return this;
+  },
+
+  setSize: function(size){
+    size = size || [ 300, 300 ];
+
+    this.options.size[0] = 0;
+    this.options.size[1] = 0;
+    this._oldMousePos.x = 0;
+    this._oldMousePos.y = 0;
+
+    this._resize(size[0], size[1]);
+
+    return this;
+  },
+
+  lock: function(){
+    this._resizerNode.style.visibility = 'hidden';
+    this._grabberNode.style.visibility = 'hidden';
+    this._closeNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:locked', this);
+    return this;
+  },
+
+  unlock: function(){
+    this._resizerNode.style.visibility = '';
+    this._grabberNode.style.visibility = '';
+    this._closeNode.style.visibility = '';
+
+    this._map.fire('dialog:unlocked', this);
+    return this;
+  },
+
+  freeze: function(){
+    this._resizerNode.style.visibility = 'hidden';
+    this._grabberNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:frozen', this);
+    return this;
+  },
+
+  unfreeze : function(){
+    this._resizerNode.style.visibility = '';
+    this._grabberNode.style.visibility = '';
+
+    this._map.fire('dialog:unfrozen', this);
     return this;
   },
 
@@ -69,6 +142,7 @@ L.Control.Dialog = L.Control.extend({
     this._updateLayout();
 
     this._container.style.visibility = '';
+    this._map.fire('dialog:updated', this);
 
   },
 
@@ -115,9 +189,9 @@ L.Control.Dialog = L.Control.extend({
 
     container.appendChild(innerContainer);
 
+    innerContainer.appendChild(contentNode);
     innerContainer.appendChild(grabberNode);
     innerContainer.appendChild(closeNode);
-    innerContainer.appendChild(contentNode);
     innerContainer.appendChild(resizerNode);
 
     this._oldMousePos = { x: 0, y: 0 };
@@ -135,6 +209,7 @@ L.Control.Dialog = L.Control.extend({
     L.DomEvent.on(this._map, 'mousemove', this._handleMouseMove, this);
     L.DomEvent.on(this._map, 'mouseup', this._handleMouseUp, this);
 
+    this._map.fire('dialog:resizestart', this);
     this._resizing = true;
   },
 
@@ -145,6 +220,7 @@ L.Control.Dialog = L.Control.extend({
     L.DomEvent.on(this._map, 'mousemove', this._handleMouseMove, this);
     L.DomEvent.on(this._map, 'mouseup', this._handleMouseUp, this);
 
+    this._map.fire('dialog:movestart', this);
     this._moving = true;
   },
 
@@ -169,8 +245,15 @@ L.Control.Dialog = L.Control.extend({
     L.DomEvent.off(this._map, 'mousemove', this._handleMouseMove, this);
     L.DomEvent.off(this._map, 'mouseup', this._handleMouseUp, this);
 
-    this._resizing = false;
-    this._moving = false;
+    if(this._resizing){
+      this._resizing = false;
+      this._map.fire('dialog:resizeend', this);
+    }
+
+    if(this._moving){
+      this._moving = false;
+      this._map.fire('dialog:moveend', this);
+    }
   },
 
   _move: function(diffX, diffY){
@@ -187,6 +270,8 @@ L.Control.Dialog = L.Control.extend({
 
     this._container.style.left = this.options.anchor[0] + 'px';
     this._container.style.top = this.options.anchor[1] + 'px';
+
+    this._map.fire('dialog:moving', this);
 
     this._oldMousePos.x += diffX;
     this._oldMousePos.y += diffY;
@@ -207,6 +292,8 @@ L.Control.Dialog = L.Control.extend({
       this._container.style.height = this.options.size[1] + 'px';
       this._oldMousePos.y += diffY;
     }
+
+    this._map.fire('dialog:resizing', this);
   },
 
   _updateContent: function(){
