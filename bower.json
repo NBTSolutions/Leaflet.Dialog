@@ -1,7 +1,7 @@
 {
   "name": "leaflet-dialog",
   "description": "Resizable, movable dialog window for Leaflet",
-  "version": "1.0.1",
+  "version": "1.0.2",
   "main": [
     "Leaflet.Dialog.js",
     "Leaflet.Dialog.css"
@@ -24,9 +24,11 @@
     "window"
   ],
   "authors": [
-    {"name":"Nate Marquardt"}
+    {
+      "name": "Nate Marquardt"
+    }
   ],
-  "homepage":"",
+  "homepage": "",
   "repository": {
     "type": "git",
     "url": "https://github.com/NBTSolutions/Leaflet.Dialog.git"
