@@ -11,6 +11,11 @@ A dialog modal window that is resizable and positionable on the map.
 bower install Leaflet.Dialog
 ````
 
+````shell
+# NPM:
+npm install leaflet-dialog
+````
+
 ## Adding a dialog box:
 
 ````js
