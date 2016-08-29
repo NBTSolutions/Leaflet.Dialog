@@ -103,14 +103,14 @@ L.Control.Dialog = L.Control.extend({
     return this;
   },
   
-  close: function(){
+  lockclose: function(){
     this._closeNode.style.visibility = 'hidden';
 
     this._map.fire('dialog:locked', this);
     return this;
   },
 
-  unclose: function(){
+  unlockclose: function(){
     this._closeNode.style.visibility = '';
 
     this._map.fire('dialog:unlocked', this);
