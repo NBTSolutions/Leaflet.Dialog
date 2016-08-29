@@ -102,6 +102,20 @@ L.Control.Dialog = L.Control.extend({
     this._map.fire('dialog:unlocked', this);
     return this;
   },
+  
+  close: function(){
+    this._closeNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:locked', this);
+    return this;
+  },
+
+  unclose: function(){
+    this._closeNode.style.visibility = '';
+
+    this._map.fire('dialog:unlocked', this);
+    return this;
+  },
 
   freeze: function(){
     this._resizerNode.style.visibility = 'hidden';
