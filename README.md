@@ -73,6 +73,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | setSize( [Array][width, height] size ) | this | dialog.setSize( [ 150, 150 ] ); | Resize the dialog window to the specified width and height.
 | lock() | this | dialog.lock(); | Hides all visible dialog window controls.
 | unlock() | this | dialog.unlock(); | Re-instates all dialog window controls.
+| lockclose() | this | dialog.lockclose(); | Hides close visible dialog window controls.
+| unlockclose() | this | dialog.unlockclose(); | Re-instates close dialog window controls.
 | freeze() | this | dialog.freeze(); | Hides all visible dialog window movement/sizing controls.
 | unfreeze() | this | dialog.unfreeze(); | Re-instates all dialog window movement/sizing controls.
 
