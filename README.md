@@ -85,6 +85,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | dialog:destroyed | this | Fired when destroy() is called.
 | dialog:locked | this | Fired when lock() is called.
 | dialog:unlocked | this | Fired when unlock() is called.
+| dialog:lockedclose | this | Fired when lockclose() is called.
+| dialog:unlockedclose | this | Fired when unlockclose() is called.
 | dialog:frozen | this | Fired when freeze() is called.
 | dialog:unfrozen | this | Fired when unfreeze() is called.
 | dialog:updated | this | Fired when contents are set or when added to the map.
