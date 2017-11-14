@@ -75,6 +75,10 @@ dialog.setContent("<p>Here's some new content!</p>");
 | unlock() | this | dialog.unlock(); | Re-instates all dialog window controls.
 | freeze() | this | dialog.freeze(); | Hides all visible dialog window movement/sizing controls.
 | unfreeze() | this | dialog.unfreeze(); | Re-instates all dialog window movement/sizing controls.
+| hideClose() | this | dialog.hideClose(); | Hides the closing 'x'
+| showClose() | this | dialog.showClose(); | Shows the closing 'x'
+| hideResize() | this | dialog.hideResize(); | Hides the resizing symbol
+| showResize() | this | dialog.showResize(); | Shows the resizing symbol
 
 ## Events:
 
@@ -94,3 +98,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | dialog:movestart | this | Fired when the move button is clicked.
 | dialog:moving | this | Fired continuously as the move button is dragged.
 | dialog:moveend | this | Fired when the move button click is released.
+| dialog:closehidden | this | Fired when hideClose() is called.
+| dialog:closeshown | this | Fired when the showClose() is called.
+| dialog:resizehidden | this | Fired when hideResize() is called.
+| dialog:resizeshown | this | Fired when the showResize() is called.
+

@@ -52,8 +52,8 @@ L.Control.Dialog = L.Control.extend({
     this.removeFrom(this._map);
 
     if (this.onRemove) {
-			this.onRemove(this._map);
-		}
+      this.onRemove(this._map);
+    }
 
     this._map.fire('dialog:destroyed', this);
     return this;
@@ -116,6 +116,34 @@ L.Control.Dialog = L.Control.extend({
     this._grabberNode.style.visibility = '';
 
     this._map.fire('dialog:unfrozen', this);
+    return this;
+  },
+
+  hideClose: function(){
+    this._closeNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:closehidden', this);
+    return this;
+  },
+
+  showClose: function(){
+    this._closeNode.style.visibility = '';
+
+    this._map.fire('dialog:closeshown', this);
+    return this;
+  },
+
+  hideResize: function(){
+    this._resizerNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:resizehidden', this);
+    return this;
+  },
+
+  showResize: function(){
+    this._resizerNode.style.visibility = '';
+
+    this._map.fire('dialog:resizeshown', this);
     return this;
   },
 
