@@ -73,6 +73,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | setSize( [Array][width, height] size ) | this | dialog.setSize( [ 150, 150 ] ); | Resize the dialog window to the specified width and height.
 | lock() | this | dialog.lock(); | Hides all visible dialog window controls.
 | unlock() | this | dialog.unlock(); | Re-instates all dialog window controls.
+| hideclose() | this | dialog.hideclose(); | Hides close visible dialog window control.
+| showclose() | this | dialog.showclose(); | Re-instates close dialog window control.
 | freeze() | this | dialog.freeze(); | Hides all visible dialog window movement/sizing controls.
 | unfreeze() | this | dialog.unfreeze(); | Re-instates all dialog window movement/sizing controls.
 | hideClose() | this | dialog.hideClose(); | Hides the closing 'x'
@@ -89,6 +91,8 @@ dialog.setContent("<p>Here's some new content!</p>");
 | dialog:destroyed | this | Fired when destroy() is called.
 | dialog:locked | this | Fired when lock() is called.
 | dialog:unlocked | this | Fired when unlock() is called.
+| dialog:hideclose | this | Fired when hideclose() is called.
+| dialog:showclose | this | Fired when showclose() is called.
 | dialog:frozen | this | Fired when freeze() is called.
 | dialog:unfrozen | this | Fired when unfreeze() is called.
 | dialog:updated | this | Fired when contents are set or when added to the map.

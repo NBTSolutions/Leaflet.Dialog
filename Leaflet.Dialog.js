@@ -46,6 +46,20 @@ L.Control.Dialog = L.Control.extend({
     return this;
   },
 
+  hideclose: function(){
+    this._closeNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:hiddenclose', this);
+    return this;
+  },
+
+  showclose: function(){
+    this._closeNode.style.visibility = '';
+
+    this._map.fire('dialog:showingclose', this);
+    return this;
+  },
+
   destroy: function(){
     if(!this._map){ return this; }
 
