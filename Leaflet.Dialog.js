@@ -119,6 +119,34 @@ L.Control.Dialog = L.Control.extend({
     return this;
   },
 
+  hideClose: function(){
+    this._closeNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:closehidden', this);
+    return this;
+  },
+
+  showClose: function(){
+    this._closeNode.style.visibility = '';
+
+    this._map.fire('dialog:closeshown', this);
+    return this;
+  },
+
+  hideResize: function(){
+    this._resizerNode.style.visibility = 'hidden';
+
+    this._map.fire('dialog:resizehidden', this);
+    return this;
+  },
+
+  showResize: function(){
+    this._resizerNode.style.visibility = '';
+
+    this._map.fire('dialog:resizeshown', this);
+    return this;
+  },
+
   setContent: function(content){
     this._content = content;
     this.update();

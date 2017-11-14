@@ -8,8 +8,12 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css">
 
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.css" />
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/0.7.7/leaflet.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css"
+   integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ=="
+   crossorigin=""/>
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js"
+   integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log=="
+   crossorigin=""></script>
 
     <script src="Leaflet.Dialog.js"></script>
     <link rel="stylesheet" href="Leaflet.Dialog.css"/>
@@ -46,11 +50,34 @@
                     "<button class='btn btn-primary' onclick='dialog.setLocation([ 50, 50 ])'>dialog.setLocation([ 50, 50 ])</button><br/><br/>",
                     "<button class='btn btn-danger' onclick='dialog.freeze()'>dialog.freeze()</button>&nbsp;&nbsp;",
                     "<button class='btn btn-success' onclick='dialog.unfreeze()'>dialog.unfreeze()</button><br/><br/>",
+                    "<button class='btn btn-danger' onclick='dialog.hideClose()'>dialog.hideClose()</button>",
+                    "<button class='btn btn-success' onclick='dialog.showClose()'>dialog.showClose()</button><br/><br/>",
+                    "<button class='btn btn-danger' onclick='dialog.hideResize()'>dialog.hideResize()</button>",
+                    "<button class='btn btn-success' onclick='dialog.showResize()'>dialog.showResize()</button><br/><br/>"
                     ].join('');
 
     var dialog = L.control.dialog()
               .setContent(contents)
               .addTo(map);
+
+    map.on('dialog:opened', function(e){ console.log("dialog opened event fired."); });
+    map.on('dialog:closed', function(e){ console.log("dialog closed event fired."); });
+    map.on('dialog:destroyed', function(e){ console.log("dialog destroyed event fired."); });
+    map.on('dialog:locked', function(e){ console.log("dialog locked event fired."); });
+    map.on('dialog:unlocked', function(e){ console.log("dialog unlocked event fired."); });
+    map.on('dialog:frozen', function(e){ console.log("dialog frozen event fired."); });
+    map.on('dialog:unfrozen', function(e){ console.log("dialog unfrozen event fired."); });
+    map.on('dialog:updated', function(e){ console.log("dialog updated event fired."); });
+    map.on('dialog:resizestart', function(e){ console.log("dialog resizestart event fired."); });
+    map.on('dialog:resizing', function(e){ console.log("dialog resizing event fired."); });
+    map.on('dialog:resizeend', function(e){ console.log("dialog resizeend event fired."); });
+    map.on('dialog:movestart', function(e){ console.log("dialog movestart event fired."); });
+    map.on('dialog:moving', function(e){ console.log("dialog moving event fired."); });
+    map.on('dialog:moveend', function(e){ console.log("dialog moveend event fired."); });
+    map.on('dialog:closehidden', function(e){ console.log("dialog closehidden event fired."); });
+    map.on('dialog:closeshown', function(e){ console.log("dialog closeshown event fired."); });
+    map.on('dialog:resizehidden', function(e){ console.log("dialog resizehidden event fired."); });
+    map.on('dialog:resizeshown', function(e){ console.log("dialog resizeshown event fired."); });
 
     </script>
   </body>
