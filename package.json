@@ -1,6 +1,6 @@
 {
   "name": "leaflet-dialog",
-  "version": "1.0.4",
+  "version": "0.0.1",
   "description": "Resizable, movable dialog window for Leaflet",
   "devDependencies": {
     "leaflet": "~0.7.0",
