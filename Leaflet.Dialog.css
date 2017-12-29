@@ -18,6 +18,7 @@
 
 .leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-grabber{
   position: absolute;
+  box-sizing: border-box;
   width: 20px;
   height: 20px;
   top: 0px;
@@ -36,6 +37,7 @@
 
 .leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-close{
   position: absolute;
+  box-sizing: border-box;
   width: 20px;
   height: 20px;
   top: 0px;
