@@ -9,6 +9,7 @@ L.Control.Dialog = L.Control.extend({
   },
 
   initialize: function (options){
+    this.options = JSON.parse(JSON.stringify(this.options));
     L.setOptions(this, options);
 
     this._attributions = {};
@@ -52,8 +53,8 @@ L.Control.Dialog = L.Control.extend({
     this.removeFrom(this._map);
 
     if (this.onRemove) {
-			this.onRemove(this._map);
-		}
+      this.onRemove(this._map);
+    }
 
     this._map.fire('dialog:destroyed', this);
     return this;
