@@ -1,11 +1,8 @@
 {
   "name": "leaflet-dialog",
   "description": "Resizable, movable dialog window for Leaflet",
-  "version": "1.0.4",
-  "main": [
-    "Leaflet.Dialog.js",
-    "Leaflet.Dialog.css"
-  ],
+  "version": "1.0.5",
+  "main": ["Leaflet.Dialog.js", "Leaflet.Dialog.css"],
   "ignore": [
     "**/.*",
     "src",
