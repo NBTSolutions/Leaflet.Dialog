@@ -51,13 +51,13 @@ L.Control.Dialog = L.Control.extend({
       return this;
     }
 
+    this._map.fire("dialog:destroyed", this);
     this.remove();
 
     if (this.onRemove) {
       this.onRemove(this._map);
     }
 
-    this._map.fire("dialog:destroyed", this);
     return this;
   },
 
