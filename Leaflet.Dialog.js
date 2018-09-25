@@ -33,6 +33,7 @@ L.Control.Dialog = L.Control.extend({
       return;
     }
     this._container.style.visibility = "";
+    this._toogle = this.close;
 
     this._map.fire("dialog:opened", this);
 
@@ -41,8 +42,18 @@ L.Control.Dialog = L.Control.extend({
 
   close: function() {
     this._container.style.visibility = "hidden";
+    this._toogle = this.open;
 
     this._map.fire("dialog:closed", this);
+    return this;
+  },
+
+  toggle: function(){
+    return this._toggle();
+  },
+
+  _toggle: function(){
+    // update, open, and close change _toggle as needed
     return this;
   },
 
@@ -174,6 +185,7 @@ L.Control.Dialog = L.Control.extend({
     this._updateLayout();
 
     this._container.style.visibility = "";
+    this._toggle = this.close;
     this._map.fire("dialog:updated", this);
   },
 
