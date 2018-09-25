@@ -1,13 +1,13 @@
-.leaflet-control-dialog{
+.leaflet-control-dialog {
   position: absolute;
   background-color: #fff;
   padding: 0px;
   text-align: left;
   border-radius: 4px;
-  box-shadow: 0 1px 5px rgba(0,0,0,0.65);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.65);
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner{
+.leaflet-control-dialog .leaflet-control-dialog-inner {
   position: relative;
   box-sizing: border-box;
   float: left;
@@ -16,7 +16,9 @@
   padding: 20px 0px;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-grabber{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-grabber {
   position: absolute;
   box-sizing: border-box;
   width: 20px;
@@ -29,13 +31,17 @@
   color: #ccc;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-grabber:hover{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-grabber:hover {
   cursor: grab;
   cursor: -webkit-grab;
   cursor: -moz-grab;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-close{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-close {
   position: absolute;
   box-sizing: border-box;
   width: 20px;
@@ -48,11 +54,15 @@
   color: #666;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-close:hover{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-close:hover {
   cursor: pointer;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-contents{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-contents {
   position: relative;
   float: left;
   width: 100%;
@@ -64,7 +74,9 @@
   box-sizing: border-box;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-resizer{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-resizer {
   position: absolute;
   box-sizing: border-box;
   width: 20px;
@@ -77,13 +89,15 @@
   color: #ccc;
 }
 
-.leaflet-control-dialog .leaflet-control-dialog-inner .leaflet-control-dialog-resizer:hover{
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-resizer:hover {
   cursor: grab;
   cursor: -webkit-grab;
   cursor: -moz-grab;
 }
 
-.fa-rotate-45{
+.fa-rotate-45 {
   -webkit-transform: rotate(45deg);
   -moz-transform: rotate(45deg);
   -ms-transform: rotate(45deg);
