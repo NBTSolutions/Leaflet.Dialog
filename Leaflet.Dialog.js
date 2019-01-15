@@ -208,7 +208,7 @@ L.Control.Dialog = L.Control.extend({
     var grabberIcon = L.DomUtil.create("i", "fa fa-arrows");
     grabberNode.appendChild(grabberIcon);
 
-    L.DomEvent.on(grabberNode, "mousedown", this._handleMoveStart, this);
+    L.DomEvent.on(grabberNode, "mousedown touchstart", this._handleMoveStart, this);
 
     var closeNode = (this._closeNode = L.DomUtil.create(
       "div",
@@ -225,7 +225,7 @@ L.Control.Dialog = L.Control.extend({
     var resizeIcon = L.DomUtil.create("i", "fa fa-arrows-h fa-rotate-45");
     resizerNode.appendChild(resizeIcon);
 
-    L.DomEvent.on(resizerNode, "mousedown", this._handleResizeStart, this);
+    L.DomEvent.on(resizerNode, "mousedown touchstart", this._handleResizeStart, this);
 
     var contentNode = (this._contentNode = L.DomUtil.create(
       "div",
@@ -250,8 +250,8 @@ L.Control.Dialog = L.Control.extend({
     this._oldMousePos.x = e.clientX;
     this._oldMousePos.y = e.clientY;
 
-    L.DomEvent.on(this._map, "mousemove", this._handleMouseMove, this);
-    L.DomEvent.on(this._map, "mouseup", this._handleMouseUp, this);
+    L.DomEvent.on(this._map, "mousemove touchmove", this._handleMouseMove, this);
+    L.DomEvent.on(this._map, "mouseup touchend", this._handleMouseUp, this);
 
     this._map.fire("dialog:resizestart", this);
     this._resizing = true;
@@ -261,8 +261,8 @@ L.Control.Dialog = L.Control.extend({
     this._oldMousePos.x = e.clientX;
     this._oldMousePos.y = e.clientY;
 
-    L.DomEvent.on(this._map, "mousemove", this._handleMouseMove, this);
-    L.DomEvent.on(this._map, "mouseup", this._handleMouseUp, this);
+    L.DomEvent.on(this._map, "mousemove touchmove", this._handleMouseMove, this);
+    L.DomEvent.on(this._map, "mouseup touchend", this._handleMouseUp, this);
 
     this._map.fire("dialog:movestart", this);
     this._moving = true;
@@ -290,8 +290,8 @@ L.Control.Dialog = L.Control.extend({
   },
 
   _handleMouseUp: function() {
-    L.DomEvent.off(this._map, "mousemove", this._handleMouseMove, this);
-    L.DomEvent.off(this._map, "mouseup", this._handleMouseUp, this);
+    L.DomEvent.off(this._map, "mousemove touchmove", this._handleMouseMove, this);
+    L.DomEvent.off(this._map, "mouseup touchend", this._handleMouseUp, this);
 
     if (this._resizing) {
       this._resizing = false;
