@@ -205,7 +205,7 @@ L.Control.Dialog = L.Control.extend({
       "div",
       className + "-grabber"
     ));
-    var grabberIcon = L.DomUtil.create("i", "fa fa-arrows");
+    var grabberIcon = L.DomUtil.create("i", "fa fa-arrows-alt");
     grabberNode.appendChild(grabberIcon);
 
     L.DomEvent.on(grabberNode, "mousedown", this._handleMoveStart, this);
@@ -222,7 +222,7 @@ L.Control.Dialog = L.Control.extend({
       "div",
       className + "-resizer"
     ));
-    var resizeIcon = L.DomUtil.create("i", "fa fa-arrows-h fa-rotate-45");
+    var resizeIcon = L.DomUtil.create("i", "fa fa-arrows-alt-h fa-rotate-45");
     resizerNode.appendChild(resizeIcon);
 
     L.DomEvent.on(resizerNode, "mousedown", this._handleResizeStart, this);
