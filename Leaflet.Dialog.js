@@ -209,6 +209,7 @@ L.Control.Dialog = L.Control.extend({
     grabberNode.appendChild(grabberIcon);
 
     L.DomEvent.on(grabberNode, "mousedown", this._handleMoveStart, this);
+    L.DomEvent.on(grabberNode, "touchstart", this._handleTouchMoveStart, this);
 
     var closeNode = (this._closeNode = L.DomUtil.create(
       "div",
@@ -226,6 +227,7 @@ L.Control.Dialog = L.Control.extend({
     resizerNode.appendChild(resizeIcon);
 
     L.DomEvent.on(resizerNode, "mousedown", this._handleResizeStart, this);
+    L.DomEvent.on(resizerNode, "touchstart", this._handleTouchResizeStart, this);
 
     var contentNode = (this._contentNode = L.DomUtil.create(
       "div",
@@ -257,12 +259,34 @@ L.Control.Dialog = L.Control.extend({
     this._resizing = true;
   },
 
+  _handleTouchResizeStart: function(e) {
+    this._oldMousePos.x = e.clientX;
+    this._oldMousePos.y = e.clientY;
+
+    L.DomEvent.on(this._resizerNode, "touchmove", this._handleTouchResize, this);
+    L.DomEvent.on(this._resizerNode, "touchend", this._handleTouchResizeEnd, this);
+
+    this._map.fire("dialog:resizestart", this);
+    this._resizing = true;
+  },
+
   _handleMoveStart: function(e) {
     this._oldMousePos.x = e.clientX;
     this._oldMousePos.y = e.clientY;
 
     L.DomEvent.on(this._map, "mousemove", this._handleMouseMove, this);
     L.DomEvent.on(this._map, "mouseup", this._handleMouseUp, this);
+
+    this._map.fire("dialog:movestart", this);
+    this._moving = true;
+  },
+
+  _handleTouchMoveStart: function(e) {
+    this._oldMousePos.x = e.clientX;
+    this._oldMousePos.y = e.clientY;
+
+    L.DomEvent.on(this._grabberNode, "touchmove", this._handleTouchMove, this);
+    L.DomEvent.on(this._grabberNode, "touchend", this._handleTouchMoveEnd, this);
 
     this._map.fire("dialog:movestart", this);
     this._moving = true;
@@ -289,6 +313,20 @@ L.Control.Dialog = L.Control.extend({
     }
   },
 
+  _handleTouchMove: function(e) {
+    var diffX = e.clientX - this._oldMousePos.x,
+      diffY = e.clientY - this._oldMousePos.y;
+
+    this._move(diffX, diffY);
+  },
+
+  _handleTouchResize: function(e) {
+    var diffX = e.clientX - this._oldMousePos.x,
+      diffY = e.clientY - this._oldMousePos.y;
+
+    this._resize(diffX, diffY);
+  },
+
   _handleMouseUp: function() {
     L.DomEvent.off(this._map, "mousemove", this._handleMouseMove, this);
     L.DomEvent.off(this._map, "mouseup", this._handleMouseUp, this);
@@ -302,6 +340,25 @@ L.Control.Dialog = L.Control.extend({
       this._moving = false;
       this._map.fire("dialog:moveend", this);
     }
+  },
+
+  _handleTouchResizeEnd: function() {
+    L.DomEvent.off(this._resizerNode, "touchmove", this._handleTouchResize, this);
+    L.DomEvent.off(this._resizerNode, "touchup", this._handleTouchResizeEnd, this);
+
+    this._resizing = false;
+    this._map.fire("dialog:resizeend", this);
+
+    this._moving = false;
+    this._map.fire("dialog:moveend", this);
+  },
+
+  _handleTouchMoveEnd: function() {
+    L.DomEvent.off(this._grabberNode, "touchmove", this._handleTouchMove, this);
+    L.DomEvent.off(this._grabberNode, "touchup", this._handleTouchMoveEnd, this);
+
+    this._moving = false;
+    this._map.fire("dialog:moveend", this);
   },
 
   _move: function(diffX, diffY) {
