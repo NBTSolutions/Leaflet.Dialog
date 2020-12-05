@@ -13,7 +13,7 @@
   float: left;
   width: 100%;
   height: 100%;
-  padding: 20px 0px;
+  padding: 30px 0px 20px 0px;
 }
 
 .leaflet-control-dialog
@@ -23,8 +23,8 @@
   box-sizing: border-box;
   width: 20px;
   height: 20px;
-  top: 0px;
-  left: 0px;
+  top: 3px;
+  left: 2px;
   padding: 3px;
   font-size: 15px;
   line-height: 15px;
@@ -46,8 +46,8 @@
   box-sizing: border-box;
   width: 20px;
   height: 20px;
-  top: 0px;
-  right: 0px;
+  top: 3px;
+  right: 2px;
   padding: 2px;
   font-size: 16px;
   line-height: 16px;
@@ -57,6 +57,27 @@
 .leaflet-control-dialog
   .leaflet-control-dialog-inner
   .leaflet-control-dialog-close:hover {
+  cursor: pointer;
+}
+
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-collapse {
+  position: absolute;
+  box-sizing: border-box;
+  width: 20px;
+  height: 20px;
+  top: 3px;
+  right: 22px;
+  padding: 2px;
+  font-size: 16px;
+  line-height: 16px;
+  color: #666;
+}
+
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-collapse:hover {
   cursor: pointer;
 }
 
@@ -92,6 +113,29 @@
 .leaflet-control-dialog
   .leaflet-control-dialog-inner
   .leaflet-control-dialog-resizer:hover {
+  cursor: se-resize;
+  cursor: -webkit-se-resize;
+  cursor: -moz-se-resize;
+}
+
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-grabber-title {
+  position: absolute;
+  box-sizing: border-box;
+  width: 100%;
+  height: 30px;
+  top: 0px;
+  left: 0px;
+  padding: 6px;
+  font-size: 15px;
+  line-height: 18px;
+  color: #666;
+}
+
+.leaflet-control-dialog
+  .leaflet-control-dialog-inner
+  .leaflet-control-dialog-grabber-title:hover {
   cursor: grab;
   cursor: -webkit-grab;
   cursor: -moz-grab;
@@ -103,4 +147,9 @@
   -ms-transform: rotate(45deg);
   -o-transform: rotate(45deg);
   transform: rotate(45deg);
+}
+
+.leaflet-control-dialog.dialog-hidden
+	.leaflet-control-dialog-contents {
+	display: none;
 }
