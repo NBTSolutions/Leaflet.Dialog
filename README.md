@@ -62,13 +62,7 @@ dialog.setContent("<p>Here's some new content!</p>");
 | position | [String] | 'topleft' | The leaflet control div to place the modal inside, as a starting reference point.
 | initOpen | [Boolean] | true | Whether or not to initialize in an open state.
 | title | [String] |null | Title bar HTML
-| iconClass | [Object] |`{`
-`grabber: "fa fa-arrows",`
-`close: "fa fa-times",`
-`resize: "fa fa-arrows-h fa-rotate-45",`
-`collapse: "fa caret-down",`
-`expand: "fa caret-up",`
-`}` | Classes to be used as icons for grabber, close, resize, expand/resize
+| iconClass | [Object] |`{grabber: "fa fa-arrows", close: "fa fa-times", resize: "fa fa-arrows-h fa-rotate-45", collapse: "fa caret-down", expand: "fa caret-up"}` | Classes to be used as icons for grabber, close, resize, expand/resize
 
 ## Methods:
 
