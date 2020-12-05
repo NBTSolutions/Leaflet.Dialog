@@ -5,7 +5,15 @@ L.Control.Dialog = L.Control.extend({
     maxSize: [ 350, 350 ],
     anchor: [ 250, 250 ],
     position: "topleft",
-    initOpen: true
+    initOpen: true,
+	title: null,
+	iconClass: {
+		grabber: "fa fa-arrows",
+		close: "fa fa-times",
+		resize: "fa fa-arrows-h fa-rotate-45",
+		collapse: "fa caret-down",
+		expand: "fa caret-up",
+	}
   },
 
   initialize: function(options) {
@@ -13,6 +21,7 @@ L.Control.Dialog = L.Control.extend({
     L.setOptions(this, options);
 
     this._attributions = {};
+    this._collapsed = false;
   },
 
   onAdd: function(map) {
@@ -201,12 +210,20 @@ L.Control.Dialog = L.Control.extend({
       className + "-inner"
     ));
 
-    var grabberNode = (this._grabberNode = L.DomUtil.create(
-      "div",
-      className + "-grabber"
-    ));
-    var grabberIcon = L.DomUtil.create("i", "fa fa-arrows");
-    grabberNode.appendChild(grabberIcon);
+    if (this.options.title) {
+        var grabberNode = (this._resizerNode = L.DomUtil.create(
+          "div",
+          className + "-grabber-title"
+        ));
+        grabberNode.innerHTML = this.options.title;
+    } else {
+        grabberNode = (this._grabberNode = L.DomUtil.create(
+          "div",
+          className + "-grabber"
+        ));
+        var grabberIcon = L.DomUtil.create("i", this.options.iconClass.grabber);
+        grabberNode.appendChild(grabberIcon);
+    }
 
     L.DomEvent.on(grabberNode, "mousedown", this._handleMoveStart, this);
 
@@ -214,16 +231,26 @@ L.Control.Dialog = L.Control.extend({
       "div",
       className + "-close"
     ));
-    var closeIcon = L.DomUtil.create("i", "fa fa-times");
+    var closeIcon = L.DomUtil.create("i", this.options.iconClass.close);
     closeNode.appendChild(closeIcon);
     L.DomEvent.on(closeNode, "click", this._handleClose, this);
+    
+    L.DomEvent.on(grabberNode, "mousedown", this._handleMoveStart, this);
+
+    var collapseNode = (this._collapse = L.DomUtil.create(
+      "div",
+      className + "-collapse"
+    ));
+    this._collapseIcon = L.DomUtil.create("i", this.options.iconClass.collapse);
+    collapseNode.appendChild(this._collapseIcon);
+    L.DomEvent.on(collapseNode, "click", this._handleCollapse, this);
 
     var resizerNode = (this._resizerNode = L.DomUtil.create(
       "div",
       className + "-resizer"
     ));
-    var resizeIcon = L.DomUtil.create("i", "fa fa-arrows-h fa-rotate-45");
-    resizerNode.appendChild(resizeIcon);
+    var resizeIcon = L.DomUtil.create("i", this.options.iconClass.resize);
+    resizerNode.appendChild(resizeIcon)
 
     L.DomEvent.on(resizerNode, "mousedown", this._handleResizeStart, this);
 
@@ -237,9 +264,41 @@ L.Control.Dialog = L.Control.extend({
     innerContainer.appendChild(contentNode);
     innerContainer.appendChild(grabberNode);
     innerContainer.appendChild(closeNode);
+    innerContainer.appendChild(collapseNode);
     innerContainer.appendChild(resizerNode);
 
     this._oldMousePos = { x: 0, y: 0 };
+  },
+
+  _handleCollapse: function() {
+    this._collapsed = !this._collapsed;
+    if (this._collapsed) {
+        this._rmClasses(this._collapseIcon, this.options.iconClass.collapse);
+        this._addClasses(this._collapseIcon, this.options.iconClass.expand);
+		L.DomUtil.addClass(this._container, 'dialog-hidden');
+		this._container._h = this._container.style.height;
+		this._container.style.height = '30px';
+    } else {
+        this._rmClasses(this._collapseIcon, this.options.iconClass.expand);
+        this._addClasses(this._collapseIcon, this.options.iconClass.collapse);
+		L.DomUtil.removeClass(this._container, 'dialog-hidden');
+		this._container.style.height = this._container._h;
+    }
+    console.log("_handleCollapse", this._collapsed);
+  },
+  
+  _rmClasses: function(el, str) {
+    var arr = str.split(" ");
+    for (var k in arr) {
+        L.DomUtil.removeClass(el, arr[k]);
+    }
+  },
+  
+  _addClasses: function(el, str) {
+    var arr = str.split(" ");
+    for (var k in arr) {
+        L.DomUtil.addClass(el, arr[k]);
+    }
   },
 
   _handleClose: function() {
